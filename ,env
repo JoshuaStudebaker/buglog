@@ -1,5 +1,0 @@
-CONNECTION_STRING=mongodb+srv://joshua-studebaker:Wolfstone12@studeworks-cluster.uwbjy.mongodb.net/buglog?retryWrites=true&w=majority
-PORT=3000
-AUTH_DOMAIN=joshua-studebaker.us.auth0.com
-AUTH_AUDIENCE=https://buglog-studeworks.com
-AUTH_CLIENT_ID=CjEZgBy6tX5G0tls4fLNAIzPcO843ixs
