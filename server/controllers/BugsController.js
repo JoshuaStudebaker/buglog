@@ -11,7 +11,7 @@ export class BugsController extends BaseController {
       .use(auth0provider.getAuthorizedUserInfo)
       .get("", this.getAll)
       .get("/:id", this.getById)
-      // .get("/:id/notes", this.getNotesByBugId)
+      .get("/:id/notes", this.getNotesByBugId)
       .post("", this.create)
       .put("/:id", this.edit);
     // NOTE No deletes, only closes!
@@ -30,6 +30,16 @@ export class BugsController extends BaseController {
     try {
       let data = await bugsService.getById(req.params.id, req.userInfo.email);
       return res.send(data);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async getNotesByBugId(req, res, next) {
+    try {
+      console.log("get notes by Id");
+      // let data = await bugsService.getNotesById(req.params.id, req.userInfo.email);
+      // return res.send(data);
     } catch (error) {
       next(error);
     }
