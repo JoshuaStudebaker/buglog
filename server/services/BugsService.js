@@ -2,6 +2,9 @@ import { dbContext } from "../db/DbContext";
 import { BadRequest } from "../utils/Errors";
 
 class BugsService {
+  closeBug(id, email, body) {
+    throw new Error("Method not implemented.");
+  }
   async getAll(userEmail) {
     return await dbContext.Bugs.find({ creatorEmail: userEmail }).populate(
       "creator",

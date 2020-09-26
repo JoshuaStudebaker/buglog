@@ -38,7 +38,7 @@ export class BugsController extends BaseController {
   async getNotesByBugId(req, res, next) {
     try {
       console.log("get notes by Id");
-      // let data = await bugsService.getNotesById(req.params.id, req.userInfo.email);
+      // let data = await bugsService.getNotesByBugId(req.params.id, req.userInfo.email);
       // return res.send(data);
     } catch (error) {
       next(error);
@@ -68,10 +68,14 @@ export class BugsController extends BaseController {
     }
   }
 
-  async delete(req, res, next) {
+  async closeBug(req, res, next) {
     try {
-      await bugsService.delete(req.params.id, req.userInfo.email);
-      return res.send("Successfully deleted");
+      let data = await bugsService.closeBug(
+        req.params.id,
+        req.userInfo.email,
+        req.body
+      );
+      return res.send(data);
     } catch (error) {
       next(error);
     }
