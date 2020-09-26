@@ -2,9 +2,6 @@ import { dbContext } from "../db/DbContext";
 import { BadRequest } from "../utils/Errors";
 
 class BugsService {
-  closeBug(id, email, body) {
-    throw new Error("Method not implemented.");
-  }
   async getAll(userEmail) {
     return await dbContext.Bugs.find({ creatorEmail: userEmail }).populate(
       "creator",
@@ -22,11 +19,10 @@ class BugsService {
     }
     return data;
   }
-  async find(query = {}) {
-    // REVIEW Add .populate()
-    let comment = await dbContext.Bugs.find(query);
-    return comment;
-  }
+  // async find(query = {}) {
+  //   let comment = await dbContext.Bugs.find(query);
+  //   return comment;
+  // }
   async create(rawData) {
     let data = await dbContext.Bugs.create(rawData);
     return data;
@@ -42,16 +38,6 @@ class BugsService {
       throw new BadRequest("Invalid ID or you do not own this bug");
     }
     return data;
-  }
-
-  async delete(id, userEmail) {
-    let data = await dbContext.Bugs.findOneAndRemove({
-      _id: id,
-      creatorEmail: userEmail,
-    });
-    if (!data) {
-      throw new BadRequest("Invalid ID or you do not own this bug");
-    }
   }
 }
 

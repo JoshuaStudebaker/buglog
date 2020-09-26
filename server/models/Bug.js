@@ -19,4 +19,8 @@ Bug.virtual("creator", {
   justOne: true,
 });
 
+// function timeStampToDate(timeStamp) {
+//   timeStamp.toDate()
+// }
+
 export default Bug;

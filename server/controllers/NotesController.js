@@ -1,25 +1,24 @@
 import express from "express";
 import BaseController from "../utils/BaseController";
 import auth0provider from "@bcwdev/auth0provider";
-import { bugsService } from "../services/BugsService";
+import { notesService } from "../services/NotesService";
 
 //PUBLIC
-export class BugsController extends BaseController {
+export class NotesController extends BaseController {
   constructor() {
-    super("api/bugs");
+    super("api/notes");
     this.router
       .use(auth0provider.getAuthorizedUserInfo)
       .get("", this.getAll)
       .get("/:id", this.getById)
-      .get("/:id/notes", this.getNotesByBugId)
       .post("", this.create)
-      .put("/:id", this.edit);
-    // NOTE No deletes, only closes!
+      .put("/:id", this.edit)
+      .delete("/:id", this.delete);
   }
   async getAll(req, res, next) {
     try {
-      // only gets bugs by user who is logged in
-      let data = await bugsService.getAll(req.userInfo.email);
+      // only gets notes by user who is logged in
+      let data = await notesService.getAll(req.userInfo.email);
       return res.send(data);
     } catch (err) {
       next(err);
@@ -27,18 +26,8 @@ export class BugsController extends BaseController {
   }
   async getById(req, res, next) {
     try {
-      let data = await bugsService.getById(req.params.id, req.userInfo.email);
+      let data = await notesService.getById(req.params.id, req.userInfo.email);
       return res.send(data);
-    } catch (error) {
-      next(error);
-    }
-  }
-
-  async getNotesByBugId(req, res, next) {
-    try {
-      console.log("get notes by Id");
-      // let data = await bugsService.getNotesByBugId(req.params.id, req.userInfo.email);
-      // return res.send(data);
     } catch (error) {
       next(error);
     }
@@ -47,7 +36,7 @@ export class BugsController extends BaseController {
   async create(req, res, next) {
     try {
       req.body.creatorEmail = req.userInfo.email;
-      let data = await bugsService.create(req.body);
+      let data = await notesService.create(req.body);
       return res.status(201).send(data);
     } catch (error) {
       next(error);
@@ -56,12 +45,21 @@ export class BugsController extends BaseController {
 
   async edit(req, res, next) {
     try {
-      let data = await bugsService.edit(
+      let data = await notesService.edit(
         req.params.id,
         req.userInfo.email,
         req.body
       );
       return res.send(data);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async delete(req, res, next) {
+    try {
+      await notesService.delete(req.params.id, req.userInfo.email);
+      return res.send("Successfully deleted");
     } catch (error) {
       next(error);
     }
