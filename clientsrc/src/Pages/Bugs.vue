@@ -1,7 +1,7 @@
 <template>
   <div class="bugs container-fluid d-flex flex-column">
     <div class="row">
-      <form @submit.prevent="addBug">
+      <form @submit.prevent="createBug">
         <div class="form-group">
           <input
             type="text"
@@ -16,6 +16,7 @@
             rows="4"
             class="form-control"
             id="bugDescription"
+            v-model="newBug.description"
             placeholder="Enter Description..."
           ></textarea>
         </div>
@@ -44,10 +45,7 @@ export default {
   },
   data() {
     return {
-      newBug: {
-        title: "",
-        description: "",
-      },
+      newBug: {},
     };
   },
   computed: {
@@ -56,9 +54,10 @@ export default {
     },
   },
   methods: {
-    addBug() {
+    createBug() {
       console.log("adding bug?");
-      this.$store.dispatch("addBug", this.newBug);
+      console.log("newBug on Bug.vue", this.newBug);
+      this.$store.dispatch("createBug", this.newBug);
       this.newBug = { title: "", description: "" };
     },
   },

@@ -44,5 +44,12 @@ export default new Vuex.Store({
         console.error("cannot get bugs - sorry");
       }
     },
+
+    async createBug({ commit, state }, newBug) {
+      console.log("createBug", newBug);
+      let res = await api.post("bugs", newBug);
+      console.log("createBug - res", res);
+      commit("setBugs", [...state.bugs, res.data]);
+    },
   },
 });
