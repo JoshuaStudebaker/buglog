@@ -4,7 +4,7 @@
     <img class="rounded" :src="profile.picture" alt="" />
     <p>{{ profile.email }}</p>
     <router-link :to="{ name: 'Bugs' }"
-      ><button class="btn btn-primary">Go to Bugs</button></router-link
+      ><button class="btn btn-primary">Go to Your Bugs</button></router-link
     >
   </div>
 </template>
@@ -20,8 +20,4 @@ export default {
 };
 </script>
 
-<style scoped>
-img {
-  max-width: 100px;
-}
-</style>
+<style scoped></style>

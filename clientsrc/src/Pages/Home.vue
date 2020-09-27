@@ -17,7 +17,7 @@
 export default {
   name: "home",
   mounted() {
-    this.$store.dispatch("getAllBoards");
+    this.$store.dispatch("getAllBugs");
   },
   computed: {
     bugs() {
