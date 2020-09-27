@@ -6,9 +6,7 @@
 export default {
   name: "notes-component",
   props: ["noteProp"],
-  components: {
-    commentComponent,
-  },
+  components: {},
   data() {
     return {
       editedNote: {},

@@ -1,6 +1,14 @@
 <template>
   <div>
-    {{ activebug.title }}
+    <div class="card">
+      <div class="card-header">{{ activeBug.title }}</div>
+      <div class="card-body">{{ activeBug.description }}</div>
+      <div class="card-footer">
+        <button type="button" class="btn btn-primary" @click="openNoteForm">
+          Open Note Form
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -45,6 +53,8 @@ export default {
       this.$store.dispatch("editBug", this.editBug);
     },
   },
+
+  openNote() {},
 };
 </script>
 
