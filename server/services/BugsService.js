@@ -19,10 +19,7 @@ class BugsService {
     }
     return data;
   }
-  // async find(query = {}) {
-  //   let comment = await dbContext.Bugs.find(query);
-  //   return comment;
-  // }
+
   async create(rawData) {
     let data = await dbContext.Bugs.create(rawData);
     return data;

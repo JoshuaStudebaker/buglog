@@ -2,6 +2,8 @@ import { dbContext } from "../db/DbContext";
 import { BadRequest } from "../utils/Errors";
 
 class NotesService {
+  // NOTE: In a collaborative fashion, is this function misplaced? or is it okay?
+  // NOTE: Moreover, does this bring into conflict the further idea of collaborative bugs/notes etc, all the way from the profile?
   async getAll(userEmail) {
     return await dbContext.Notes.find({ creatorEmail: userEmail }).populate(
       "creator",
@@ -19,11 +21,10 @@ class NotesService {
     }
     return data;
   }
-  // async find(query = {}) {
-  //
-  //   let comment = await dbContext.Notes.find(query);
-  //   return comment;
-  // }
+  async find(query = {}) {
+    let data = await dbContext.Notes.find(query);
+    return data;
+  }
   async create(rawData) {
     let data = await dbContext.Notes.create(rawData);
     return data;
