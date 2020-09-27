@@ -1,5 +1,5 @@
 <template>
-  <div>{{ noteProp.title }} - {{ noteProp.description }}</div>
+  <div>{{ noteProp.content }}</div>
 </template>
 
 <script>
@@ -33,5 +33,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

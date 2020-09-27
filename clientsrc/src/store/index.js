@@ -19,6 +19,9 @@ export default new Vuex.Store({
     setBugs(state, bugs) {
       state.bugs = bugs;
     },
+    setActiveBug(state, activeBug) {
+      state.activeBug = activeBug;
+    },
   },
   actions: {
     setBearer({}, bearer) {
@@ -38,7 +41,9 @@ export default new Vuex.Store({
 
     async getBugs({ commit }) {
       try {
-        let res = await api.get("bugs/");
+        console.log("get bugs?");
+        let res = await api.get("bugs");
+        console.log("get bugs", res);
         commit("setBugs", res.data);
       } catch (error) {
         console.error("cannot get bugs - sorry");

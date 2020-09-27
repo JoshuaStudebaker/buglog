@@ -4,9 +4,9 @@
       <div class="card-header">{{ activeBug.title }}</div>
       <div class="card-body">{{ activeBug.description }}</div>
       <div class="card-footer">
-        <button type="button" class="btn btn-primary" @click="openNoteForm">
+        <!-- <button type="button" class="btn btn-primary" @click="openNoteForm">
           Open Note Form
-        </button>
+        </button> -->
       </div>
     </div>
   </div>
@@ -53,10 +53,7 @@ export default {
       this.$store.dispatch("editBug", this.editBug);
     },
   },
-
-  openNote() {},
 };
 </script>
 
-<style>
-</style>
+<style></style>

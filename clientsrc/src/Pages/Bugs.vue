@@ -20,28 +20,23 @@
             placeholder="Enter Description..."
           ></textarea>
         </div>
-
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+      <bugs-component v-for="iBug in bugs" :key="iBug.id" :bugProp="iBug" />
     </div>
-    <div class="row">
-      <div class="card col-md-4 my-2" v-for="iBug in bugs" :key="iBug.id">
-        <div class="card-header">
-          <h5>Bug Title: {{ bugs.title }}</h5>
-        </div>
-        <div class="card-body">
-          <p class="card-text">Description: {{ bugs.description }}</p>
-        </div>
-      </div>
-    </div>
+    <div class="row"></div>
   </div>
 </template>
 
 <script>
+import bugsComponent from "../components/BugsComponent";
 export default {
   name: "bugs",
   mounted() {
     this.$store.dispatch("getBugs");
+  },
+  components: {
+    bugsComponent,
   },
   data() {
     return {
@@ -50,6 +45,8 @@ export default {
   },
   computed: {
     bugs() {
+      let bugs = this.$store.state.bugs;
+      console.log("bugs", bugs);
       return this.$store.state.bugs;
     },
   },
