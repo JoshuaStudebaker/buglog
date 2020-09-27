@@ -27,8 +27,4 @@ export default {
 @import "./assets/_variables.scss";
 @import "bootstrap";
 @import "./assets/_overrides.scss";
-
-#app {
-  background-color: silver;
-}
 </style>
