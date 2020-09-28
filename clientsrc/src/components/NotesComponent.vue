@@ -6,7 +6,7 @@
       {{ noteProp.flagged }}
     </td>
     <td class="text-center">
-      <i class="fas fa-pencil-alt" @click="editNoteToggle(noteProp.id)"></i>
+      <i class="fas fa-pencil-alt" @click="setActiveNote(noteProp.id)"></i>
     </td>
 
     <td class="text-center">
@@ -31,6 +31,11 @@ export default {
   methods: {
     deleteNote(id) {
       this.$store.dispatch("deleteNote", id);
+    },
+
+    setActiveNote(id) {
+      console.log("setActiveNote: id", id);
+      this.$store.dispatch("createActiveNote", id);
     },
     // editNote(id) {
     //   this.editedNote.id = id;

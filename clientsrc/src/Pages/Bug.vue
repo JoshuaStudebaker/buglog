@@ -55,7 +55,7 @@
           />
         </tbody>
       </table>
-      <form @submit.prevent="editNote">
+      <form v-if="activeNote.id" @submit.prevent="editNote">
         <div class="form-group">
           <label for="noteContent">Content</label>
           <textarea
@@ -115,6 +115,10 @@ export default {
     },
     notes() {
       return this.$store.state.notes;
+    },
+
+    activeNote() {
+      return this.$store.state.activeNote;
     },
   },
 

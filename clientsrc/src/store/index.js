@@ -11,6 +11,7 @@ export default new Vuex.Store({
     bugs: [],
     activeBug: {},
     notes: [],
+    activeNote: {},
   },
   mutations: {
     setProfile(state, profile) {
@@ -22,7 +23,9 @@ export default new Vuex.Store({
     setActiveBug(state, activeBug) {
       state.activeBug = activeBug;
     },
-
+    setActiveNote(state, activeNote) {
+      state.activeNote = activeNote;
+    },
     setNotes(state, notes) {
       state.notes = notes;
     },
@@ -80,6 +83,17 @@ export default new Vuex.Store({
         commit("setActiveBug", res.data);
       } catch (error) {
         console.error("cannot get active board");
+      }
+    },
+
+    async createActiveNote({ commit, state }, id) {
+      try {
+        console.log("createActiveNote: id", id);
+        let res = state.notes.filter((n) => n.id == id);
+        console.log("createActiveNote: full data", res);
+        commit("setActiveNote", res[0]);
+      } catch (error) {
+        console.error("cannot get specific note");
       }
     },
     async getNotesByBugId({ commit }, id) {
