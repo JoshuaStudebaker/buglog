@@ -10,8 +10,10 @@
         </select>
       </div>
       <div class="col-6">
-        <form @submit.prevent="createBug" class="shadow p-3">
+        <button v-if="!formShow" class="btn btn-primary" @click="formShowClick">
           Report Bug
+        </button>
+        <form v-if="formShow" @submit.prevent="createBug" class="shadow p-3">
           <div class="form-group">
             <input
               type="text"
@@ -70,6 +72,7 @@ export default {
     return {
       newBug: {},
       toggleView: 1,
+      formShow: false,
     };
   },
   computed: {
@@ -85,6 +88,11 @@ export default {
       console.log("newBug on Bug.vue", this.newBug);
       this.$store.dispatch("createBug", this.newBug);
       this.newBug = { title: "", description: "" };
+      this.formShow = false;
+    },
+
+    formShowClick() {
+      this.formShow = true;
     },
   },
 };
