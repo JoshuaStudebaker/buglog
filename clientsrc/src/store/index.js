@@ -10,7 +10,7 @@ export default new Vuex.Store({
     profile: {},
     bugs: [],
     activeBug: {},
-    notes: {},
+    notes: [],
   },
   mutations: {
     setProfile(state, profile) {
@@ -21,6 +21,10 @@ export default new Vuex.Store({
     },
     setActiveBug(state, activeBug) {
       state.activeBug = activeBug;
+    },
+
+    setNotes(state, notes) {
+      state.notes = notes;
     },
   },
   actions: {
@@ -65,6 +69,16 @@ export default new Vuex.Store({
         commit("setActiveBug", res.data);
       } catch (error) {
         console.error("cannot get active board");
+      }
+    },
+    async getNotesByBugId({ commit }, id) {
+      try {
+        console.log("notes store");
+        let res = await api.get("bugs/" + id + "/notes");
+        console.log("res notes", res);
+        commit("setNotes", res.data);
+      } catch (error) {
+        console.error("cannot get notes");
       }
     },
   },

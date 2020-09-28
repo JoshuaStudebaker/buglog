@@ -1,13 +1,16 @@
 <template>
   <div>
-    <div class="card">
+    <div class="card col-6">
       <div class="card-header">{{ activeBug.title }}</div>
       <div class="card-body">{{ activeBug.description }}</div>
-      <div class="card-footer">
-        <!-- <button type="button" class="btn btn-primary" @click="openNoteForm">
-          Open Note Form
-        </button> -->
-      </div>
+      <div class="card-footer"></div>
+    </div>
+    <div class="col-6">
+      <notes-component
+        v-for="iNote in notes"
+        :key="iNote.id"
+        :noteProp="iNote"
+      />
     </div>
   </div>
 </template>
@@ -30,7 +33,7 @@ export default {
   props: ["bugId"],
   mounted() {
     this.$store.dispatch("getActiveBug", this.$route.params.bugId);
-    // this.$store.dispatch("getNotesByBugId", this.$route.params.bugId);
+    this.$store.dispatch("getNotesByBugId", this.$route.params.bugId);
   },
   computed: {
     activeBug() {
