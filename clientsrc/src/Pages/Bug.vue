@@ -37,11 +37,23 @@
         </div>
         <button type="submit" class="btn btn-primary">Create Note</button>
       </form>
-      <notes-component
-        v-for="iNote in notes"
-        :key="iNote.id"
-        :noteProp="iNote"
-      />
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Note</th>
+            <th scope="col">Creator</th>
+            <th scope="col">Status</th>
+            <th scope="col">Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <notes-component
+            v-for="iNote in notes"
+            :key="iNote.id"
+            :noteProp="iNote"
+          />
+        </tbody>
+      </table>
     </div>
     <div class="col-6" v-if="!activeBug.closed">
       <form @submit.prevent="editActiveBug">

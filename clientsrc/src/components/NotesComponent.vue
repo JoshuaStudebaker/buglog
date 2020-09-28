@@ -1,5 +1,10 @@
 <template>
-  <p>{{ noteProp.content }} - {{ noteProp.flagged }}</p>
+  <tr>
+    <td>{{ noteProp.content }}</td>
+    <td>{{ noteProp.creatorEmail }}</td>
+    <td>{{ noteProp.flagged }}</td>
+    <td><i class="fas fa-pencil-alt"></i></td>
+  </tr>
 </template>
 
 <script>
