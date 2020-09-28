@@ -37,7 +37,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Create Note</button>
       </form>
-      <table class="table">
+      <table v-if="!activeNote.id" class="table">
         <thead>
           <tr>
             <th scope="col">Note</th>
@@ -55,7 +55,23 @@
           />
         </tbody>
       </table>
-      <form v-if="activeNote.id" @submit.prevent="editNote">
+      <table v-if="activeNote.id" class="table">
+        <thead>
+          <tr>
+            <th scope="col">Note</th>
+
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <td>{{ this.activeNote.content }}</td>
+
+          <td>
+            {{ this.activeNote.flagged }}
+          </td>
+        </tbody>
+      </table>
+      <form v-if="activeNote.id" @submit.prevent="editNote" class="form-inline">
         <div class="form-group">
           <label for="noteContent">Content</label>
           <textarea
@@ -64,6 +80,14 @@
             id="exampleFormControlTextarea1"
             rows="3"
           ></textarea>
+        </div>
+        <div class="form-group">
+          <label for="status">Example multiple select</label>
+          <select class="form-control" id="status" v-model="editedNote.flagged">
+            <option value="pending">pending</option>
+            <option value="completed">completed</option>
+            <option value="rejected">rejected</option>
+          </select>
         </div>
         <button type="submit" class="btn btn-success">Edit Note</button>
       </form>
@@ -135,6 +159,7 @@ export default {
     },
 
     editNote() {
+      this.editedNote.id = this.activeNote.id;
       this.$store.dispatch("editNote", this.editedNote);
     },
     editNoteToggle(id) {

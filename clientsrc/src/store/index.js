@@ -115,5 +115,17 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
+
+    async editNote({ commit, state }, editData) {
+      try {
+        console.log(editData);
+        let res = await api.put("notes/" + editData.id, editData);
+        let index = state.notes.findIndex((n) => n.id == res.data.id);
+        state.notes.splice(index, 1, res.data);
+        commit("setActiveNote", {});
+      } catch (error) {
+        console.error(error);
+      }
+    },
   },
 });
