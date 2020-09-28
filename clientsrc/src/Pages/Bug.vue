@@ -44,6 +44,7 @@
             <th scope="col">Creator</th>
             <th scope="col">Status</th>
             <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -54,6 +55,18 @@
           />
         </tbody>
       </table>
+      <form @submit.prevent="editNote">
+        <div class="form-group">
+          <label for="noteContent">Content</label>
+          <textarea
+            v-model="editedNote.content"
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Edit Note</button>
+      </form>
     </div>
     <div class="col-6" v-if="!activeBug.closed">
       <form @submit.prevent="editActiveBug">
@@ -87,7 +100,7 @@ export default {
     return {
       newNote: {},
       editedBug: {},
-      editNote: {},
+      editedNote: {},
     };
   },
 
@@ -115,6 +128,13 @@ export default {
     editActiveBug() {
       console.log("edit bug", this.editedBug);
       this.$store.dispatch("editBug", this.editedBug);
+    },
+
+    editNote() {
+      this.$store.dispatch("editNote", this.editedNote);
+    },
+    editNoteToggle(id) {
+      console.log("editToggle", id);
     },
   },
 };

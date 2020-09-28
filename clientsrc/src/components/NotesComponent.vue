@@ -2,8 +2,16 @@
   <tr>
     <td>{{ noteProp.content }}</td>
     <td>{{ noteProp.creatorEmail }}</td>
-    <td>{{ noteProp.flagged }}</td>
-    <td><i class="fas fa-pencil-alt"></i></td>
+    <td class="text-center">
+      {{ noteProp.flagged }}
+    </td>
+    <td class="text-center">
+      <i class="fas fa-pencil-alt" @click="editNoteToggle(noteProp.id)"></i>
+    </td>
+
+    <td class="text-center">
+      <i class="fas fa-trash" @click="deleteNote(noteProp.id)"></i>
+    </td>
   </tr>
 </template>
 
@@ -15,7 +23,6 @@ export default {
   data() {
     return {
       editedNote: {},
-      // editToggle: false,
     };
   },
   mounted() {},
@@ -23,17 +30,17 @@ export default {
   computed: {},
   methods: {
     deleteNote(id) {
-      let payload = {
-        id: id,
-        bugId: this.noteProp.bugId,
-      };
-      this.$store.dispatch("deleteNote", payload);
+      this.$store.dispatch("deleteNote", id);
     },
-    editNote(id) {
-      this.editedNote.id = id;
-      this.$store.dispatch("editNote", this.editedNote);
-      this.editToggle = false;
-    },
+    // editNote(id) {
+    //   this.editedNote.id = id;
+    //   this.$store.dispatch("editNote", this.editedNote);
+    //   this.noteToggle = true;
+    // },
+
+    // editNoteToggle() {
+    //   this.noteToggle = false;
+    // },
   },
 };
 </script>
