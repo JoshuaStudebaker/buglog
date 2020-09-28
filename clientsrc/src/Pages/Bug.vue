@@ -25,6 +25,18 @@
       </div>
     </div>
     <div class="col-6">
+      <form @submit.prevent="createNote">
+        <div class="form-group">
+          <label for="noteContent">Content</label>
+          <textarea
+            v-model="newNote.content"
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Note</button>
+      </form>
       <notes-component
         v-for="iNote in notes"
         :key="iNote.id"
@@ -37,7 +49,6 @@
           type="text"
           class="form-control mx-3"
           placeholder="New Bug Name..."
-          aria-describedby="helpId"
           v-model="editedBug.title"
         />
         <input
@@ -84,11 +95,10 @@ export default {
 
   methods: {
     createNote() {
-      let payload = {
-        title: this.newNote.title,
-        bugId: this.bug.id,
-      };
-      this.$store.dispatch("createNote", payload);
+      this.newNote.bug = this.activeBug.id;
+      this.newNote.flagged = "pending";
+      console.log("new note", this.newNote);
+      this.$store.dispatch("createNote", this.newNote);
     },
     editActiveBug() {
       console.log("edit bug", this.editedBug);
@@ -98,4 +108,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.red-font {
+  color: red;
+}
+
+.green-font {
+  color: green;
+}
+</style>

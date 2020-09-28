@@ -1,6 +1,9 @@
 <template>
-  <router-link :to="{ name: 'Bug', params: { bugId: bugProp.id } }">
-    <div class="card col-md-4">
+  <router-link
+    class="col-md-4"
+    :to="{ name: 'Bug', params: { bugId: bugProp.id } }"
+  >
+    <div class="card ">
       <div class="card-header">{{ bugProp.title }}</div>
       <div class="card-body">
         <p class="card-text">{{ bugProp.description }}</p>

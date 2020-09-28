@@ -61,6 +61,17 @@ export default new Vuex.Store({
       commit("setBugs", [...state.bugs, res.data]);
     },
 
+    async createNote({ commit, state }, newNote) {
+      try {
+        console.log("createNote", newNote);
+        let res = await api.post("notes/", newNote);
+        console.log("createNote - res", res);
+        commit("setNotes", [...state.notes, res.data]);
+      } catch (error) {
+        console.error("cannot get create note");
+      }
+    },
+
     async getActiveBug({ commit }, id) {
       try {
         console.log("active bug id", id);
