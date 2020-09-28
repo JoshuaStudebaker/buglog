@@ -84,7 +84,7 @@ export default new Vuex.Store({
     async editBug({ commit, state }, editData) {
       try {
         console.log(editData);
-        let res = await api.put("boards/" + state.activeBug.id, editData);
+        let res = await api.put("bugs/" + state.activeBug.id, editData);
         commit("setActiveBug", res.data);
       } catch (error) {
         console.error(error);

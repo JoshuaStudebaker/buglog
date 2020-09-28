@@ -1,8 +1,12 @@
 <template>
-  <div>
+  <div class="row">
     <div class="card col-6">
       <div class="card-header">{{ activeBug.title }}</div>
-      <div class="card-body">{{ activeBug.description }}</div>
+      <div class="card-body">
+        <p>{{ activeBug.description }}</p>
+        <p v-if="activeBug.closed">Closed</p>
+        <p v-if="!activeBug.closed">Open</p>
+      </div>
       <div class="card-footer">
         <form @submit.prevent="editActiveBug">
           <div class="form-check">
@@ -26,6 +30,25 @@
         :key="iNote.id"
         :noteProp="iNote"
       />
+    </div>
+    <div class="col-6">
+      <form @submit.prevent="editActiveBug">
+        <input
+          type="text"
+          class="form-control mx-3"
+          placeholder="New Bug Name..."
+          aria-describedby="helpId"
+          v-model="editedBug.title"
+        />
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Edit Description"
+          aria-describedby="helpId"
+          v-model="editedBug.description"
+        />
+        <button type="submit" class="btn btn-warning">Edit Bug</button>
+      </form>
     </div>
   </div>
 </template>
