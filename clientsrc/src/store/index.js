@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import router from "../router";
+import SweetAlert from "../services/SweetAlert";
 import { api } from "./AxiosService";
 
 Vue.use(Vuex);
@@ -113,9 +114,17 @@ export default new Vuex.Store({
     },
     async editBug({ commit, state }, editData) {
       try {
-        console.log(editData);
-        let res = await api.put("bugs/" + state.activeBug.id, editData);
-        commit("setActiveBug", res.data);
+        if (editData.closed) {
+          if (await SweetAlert.sweetDelete()) {
+            let res = await api.put("bugs/" + state.activeBug.id, editData);
+
+            commit("setActiveBug", res.data);
+          }
+        } else {
+          let res = await api.put("bugs/" + state.activeBug.id, editData);
+
+          commit("setActiveBug", res.data);
+        }
       } catch (error) {
         console.error(error);
       }
