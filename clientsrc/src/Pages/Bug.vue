@@ -3,7 +3,22 @@
     <div class="card col-6">
       <div class="card-header">{{ activeBug.title }}</div>
       <div class="card-body">{{ activeBug.description }}</div>
-      <div class="card-footer"></div>
+      <div class="card-footer">
+        <form @submit.prevent="editActiveBug">
+          <div class="form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="exampleCheck1"
+              v-model="editedBug.closed"
+            />
+            <label class="form-check-label" for="exampleCheck1"
+              >Check me out</label
+            >
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
     </div>
     <div class="col-6">
       <notes-component
@@ -25,7 +40,7 @@ export default {
   data() {
     return {
       newNote: {},
-      editBug: {},
+      editedBug: {},
       editNote: {},
     };
   },
@@ -53,7 +68,8 @@ export default {
       this.$store.dispatch("createNote", payload);
     },
     editActiveBug() {
-      this.$store.dispatch("editBug", this.editBug);
+      console.log("edit bug", this.editedBug);
+      this.$store.dispatch("editBug", this.editedBug);
     },
   },
 };
