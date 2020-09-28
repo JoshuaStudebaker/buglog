@@ -7,7 +7,12 @@
         <p v-if="activeBug.closed">Closed</p>
         <p v-if="!activeBug.closed">Open</p>
       </div>
-      <div class="card-footer" v-if="!activeBug.closed">
+      <div
+        class="card-footer"
+        v-if="
+          !activeBug.closed && activeBug.creatorEmail == $auth.userInfo.email
+        "
+      >
         <form @submit.prevent="editActiveBug">
           <div class="form-check">
             <input
@@ -92,7 +97,10 @@
         <button type="submit" class="btn btn-success">Edit Note</button>
       </form>
     </div>
-    <div class="col-6" v-if="!activeBug.closed">
+    <div
+      class="col-6"
+      v-if="!activeBug.closed && activeBug.creatorEmail == $auth.userInfo.email"
+    >
       <form @submit.prevent="editActiveBug">
         <input
           type="text"
