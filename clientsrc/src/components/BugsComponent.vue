@@ -7,7 +7,9 @@
       <div class="card-header">{{ bugProp.title }}</div>
       <div class="card-body">
         <p class="card-text">{{ bugProp.description }}</p>
+        <p class="card-text">{{ new Date(bugProp.updatedAt) }}</p>
       </div>
+
       <div class="card-footer green-font" v-if="!bugProp.closed">
         <p>Status: Open</p>
       </div>
