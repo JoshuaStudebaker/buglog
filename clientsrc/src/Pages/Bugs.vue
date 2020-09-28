@@ -33,6 +33,13 @@
             ></textarea>
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
+          <button
+            type="button"
+            class="btn btn-danger mx-2"
+            @click="formShowCancel"
+          >
+            Cancel
+          </button>
         </form>
       </div>
     </div>
@@ -93,6 +100,10 @@ export default {
 
     formShowClick() {
       this.formShow = true;
+    },
+
+    formShowCancel() {
+      this.formShow = false;
     },
   },
 };
