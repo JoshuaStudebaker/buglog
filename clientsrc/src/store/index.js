@@ -46,10 +46,14 @@ export default new Vuex.Store({
       }
     },
 
-    async getBugs({ commit }) {
+    async getBugs({ commit }, query) {
       try {
         console.log("get bugs?");
-        let res = await api.get("bugs");
+        let url = "bugs";
+        if (query) {
+          url += query;
+        }
+        let res = await api.get(url);
         console.log("get bugs", res);
         commit("setBugs", res.data);
       } catch (error) {

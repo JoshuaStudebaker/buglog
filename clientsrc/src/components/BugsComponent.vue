@@ -12,6 +12,7 @@
           ><span v-if="!bugProp.closed">Last Edited on:</span>
           {{ new Date(bugProp.updatedAt).toUTCString() }}
         </p>
+        <p>{{ bugProp.creatorEmail }}</p>
       </div>
 
       <div class="card-footer green-font" v-if="!bugProp.closed">

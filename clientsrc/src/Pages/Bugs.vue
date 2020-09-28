@@ -70,7 +70,11 @@ import bugsComponent from "../components/BugsComponent";
 export default {
   name: "bugs",
   mounted() {
-    this.$store.dispatch("getBugs");
+    this.$store.dispatch("getProfile");
+    this.$store.dispatch(
+      "getBugs",
+      "?creatorEmail=" + this.$auth.userInfo.email
+    );
   },
   components: {
     bugsComponent,
@@ -83,6 +87,9 @@ export default {
     };
   },
   computed: {
+    profile() {
+      return this.$store.state.profile;
+    },
     bugs() {
       let bugs = this.$store.state.bugs;
       console.log("bugs", bugs);

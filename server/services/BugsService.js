@@ -9,8 +9,8 @@ class BugsService {
   //   );
   // }
 
-  async getAll() {
-    return await dbContext.Bugs.find().populate("creator", "name picture");
+  async getAll(query = {}) {
+    return await dbContext.Bugs.find(query).populate("creator", "name picture");
   }
   async getById(id) {
     let data = await dbContext.Bugs.findOne({
