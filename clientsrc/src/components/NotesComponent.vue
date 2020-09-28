@@ -1,5 +1,5 @@
 <template>
-  <div>{{ noteProp.content }}</div>
+  <p>{{ noteProp.content }} - {{ noteProp.flagged }}</p>
 </template>
 
 <script>
