@@ -7,7 +7,7 @@
         <p v-if="activeBug.closed">Closed</p>
         <p v-if="!activeBug.closed">Open</p>
       </div>
-      <div class="card-footer">
+      <div class="card-footer" v-if="!activeBug.closed">
         <form @submit.prevent="editActiveBug">
           <div class="form-check">
             <input
@@ -17,7 +17,7 @@
               v-model="editedBug.closed"
             />
             <label class="form-check-label" for="exampleCheck1"
-              >Check me out</label
+              >Close Bug (this can't be undone!)</label
             >
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
@@ -31,7 +31,7 @@
         :noteProp="iNote"
       />
     </div>
-    <div class="col-6">
+    <div class="col-6" v-if="!activeBug.closed">
       <form @submit.prevent="editActiveBug">
         <input
           type="text"
