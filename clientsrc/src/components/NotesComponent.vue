@@ -6,11 +6,19 @@
       {{ noteProp.flagged }}
     </td>
     <td class="text-center">
-      <i class="fas fa-pencil-alt" @click="setActiveNote(noteProp.id)"></i>
+      <i
+        v-if="noteProp.creatorEmail == $auth.userInfo.email.toLowerCase()"
+        class="fas fa-pencil-alt"
+        @click="setActiveNote(noteProp.id)"
+      ></i>
     </td>
 
     <td class="text-center">
-      <i class="fas fa-trash" @click="deleteNote(noteProp.id)"></i>
+      <i
+        v-if="noteProp.creatorEmail == $auth.userInfo.email.toLowerCase()"
+        class="fas fa-trash"
+        @click="deleteNote(noteProp.id)"
+      ></i>
     </td>
   </tr>
 </template>

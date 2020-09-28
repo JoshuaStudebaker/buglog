@@ -10,7 +10,8 @@
       <div
         class="card-footer"
         v-if="
-          !activeBug.closed && activeBug.creatorEmail == $auth.userInfo.email
+          !activeBug.closed &&
+            activeBug.creatorEmail == $auth.userInfo.email.toLowerCase()
         "
       >
         <form @submit.prevent="editActiveBug">
@@ -99,7 +100,10 @@
     </div>
     <div
       class="col-6"
-      v-if="!activeBug.closed && activeBug.creatorEmail == $auth.userInfo.email"
+      v-if="
+        !activeBug.closed &&
+          activeBug.creatorEmail == $auth.userInfo.email.toLowerCase()
+      "
     >
       <form @submit.prevent="editActiveBug">
         <input
