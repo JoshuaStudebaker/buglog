@@ -1,39 +1,38 @@
 <template>
   <div class="bugs container-fluid d-flex flex-column">
-    <div class="row">
-      <form @submit.prevent="createBug">
-        <div class="form-group">
-          <input
-            type="text"
-            class="form-control"
-            id="bugTitle"
-            v-model="newBug.title"
-            placeholder="Enter Bug Name..."
-          />
-        </div>
-        <div class="form-group">
-          <textarea
-            rows="4"
-            class="form-control"
-            id="bugDescription"
-            v-model="newBug.description"
-            placeholder="Enter Description..."
-          ></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </div>
-    <div>
-      <form>
-        <div class="form-group">
-          <label for="toggleView">Filter</label>
-          <select class="form-control" id="toggleView" v-model="toggleView">
-            <option value="1">All</option>
-            <option value="2">Open</option>
-            <option value="3">Closed</option>
-          </select>
-        </div>
-      </form>
+    <div class="row my-2">
+      <div class="col-6">
+        <label for="toggleView">Filter</label>
+        <select class="form-control" id="toggleView" v-model="toggleView">
+          <option value="1">All</option>
+          <option value="2">Open</option>
+          <option value="3">Closed</option>
+        </select>
+      </div>
+      <div class="col-6">
+        <form @submit.prevent="createBug" class="shadow p-3">
+          Report Bug
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              id="bugTitle"
+              v-model="newBug.title"
+              placeholder="Enter Bug Name..."
+            />
+          </div>
+          <div class="form-group">
+            <textarea
+              rows="4"
+              class="form-control"
+              id="bugDescription"
+              v-model="newBug.description"
+              placeholder="Enter Description..."
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
     </div>
     <div class="row" v-if="toggleView == 1">
       <bugs-component v-for="iBug in bugs" :key="iBug.id" :bugProp="iBug" />
