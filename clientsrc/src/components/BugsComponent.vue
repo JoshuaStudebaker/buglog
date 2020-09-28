@@ -5,6 +5,12 @@
       <div class="card-body">
         <p class="card-text">{{ bugProp.description }}</p>
       </div>
+      <div class="card-footer green-font" v-if="!bugProp.closed">
+        <p>Status: Open</p>
+      </div>
+      <div class="card-footer red-font" v-if="bugProp.closed">
+        <p>Status: Closed</p>
+      </div>
     </div>
   </router-link>
 </template>
@@ -33,4 +39,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.red-font {
+  color: red;
+}
+
+.green-font {
+  color: green;
+}
+</style>
