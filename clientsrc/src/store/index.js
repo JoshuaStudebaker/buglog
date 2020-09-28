@@ -52,9 +52,20 @@ export default new Vuex.Store({
 
     async createBug({ commit, state }, newBug) {
       console.log("createBug", newBug);
-      let res = await api.post("bugs", newBug);
+      let res = await api.post("bugs/", newBug);
       console.log("createBug - res", res);
       commit("setBugs", [...state.bugs, res.data]);
+    },
+
+    async getActiveBug({ commit }, id) {
+      try {
+        console.log("active bug id", id);
+        let res = await api.get("bugs/" + id);
+        console.log("active bug res", res);
+        commit("setActiveBug", res.data);
+      } catch (error) {
+        console.error("cannot get active board");
+      }
     },
   },
 });

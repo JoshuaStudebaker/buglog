@@ -1,5 +1,12 @@
 <template>
-  <div>{{ bugProp.title }} - {{ bugProp.description }}</div>
+  <router-link :to="{ name: 'Bug', params: { bugId: bugProp.id } }">
+    <div class="card col-md-4">
+      <div class="card-header">{{ bugProp.title }}</div>
+      <div class="card-body">
+        <p class="card-text">{{ bugProp.description }}</p>
+      </div>
+    </div>
+  </router-link>
 </template>
 
 <script>

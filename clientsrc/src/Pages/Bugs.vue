@@ -22,9 +22,10 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+    </div>
+    <div class="row">
       <bugs-component v-for="iBug in bugs" :key="iBug.id" :bugProp="iBug" />
     </div>
-    <div class="row"></div>
   </div>
 </template>
 
