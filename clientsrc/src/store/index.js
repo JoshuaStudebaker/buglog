@@ -62,6 +62,7 @@ export default new Vuex.Store({
       let res = await api.post("bugs/", newBug);
       console.log("createBug - res", res);
       commit("setBugs", [...state.bugs, res.data]);
+      router.push({ name: "Bug", params: { bugId: res.data.id } });
     },
 
     async createNote({ commit, state }, newNote) {
