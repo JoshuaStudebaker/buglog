@@ -8,9 +8,9 @@ export class NotesController extends BaseController {
   constructor() {
     super("api/notes");
     this.router
-      .use(auth0provider.getAuthorizedUserInfo)
       .get("", this.getAll)
       .get("/:id", this.getById)
+      .use(auth0provider.getAuthorizedUserInfo)
       .post("", this.create)
       .put("/:id", this.edit)
       .delete("/:id", this.delete);
@@ -18,7 +18,7 @@ export class NotesController extends BaseController {
   async getAll(req, res, next) {
     try {
       // only gets notes by user who is logged in
-      let data = await notesService.getAll(req.userInfo.email);
+      let data = await notesService.getAll();
       return res.send(data);
     } catch (err) {
       next(err);
@@ -26,7 +26,7 @@ export class NotesController extends BaseController {
   }
   async getById(req, res, next) {
     try {
-      let data = await notesService.getById(req.params.id, req.userInfo.email);
+      let data = await notesService.getById(req.params.id);
       return res.send(data);
     } catch (error) {
       next(error);

@@ -1,21 +1,18 @@
 <template>
   <div class="home container-fluid d-flex flex-column">
     <div class="row">
-      <div class="card col-md-4 my-2" v-for="iBug in bugs" :key="iBug.id">
-        <div class="card-header">
-          <h5>Bug Title: {{ bugs.title }}</h5>
-        </div>
-        <div class="card-body">
-          <p class="card-text">Description: {{ bugs.description }}</p>
-        </div>
-      </div>
+      <bugs-component v-for="iBug in bugs" :key="iBug.id" :bugProp="iBug" />
     </div>
   </div>
 </template>
 
 <script>
+import bugsComponent from "../components/BugsComponent";
 export default {
   name: "home",
+  components: {
+    bugsComponent,
+  },
   mounted() {
     this.$store.dispatch("getBugs");
   },

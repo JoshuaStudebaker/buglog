@@ -9,10 +9,10 @@ export class BugsController extends BaseController {
   constructor() {
     super("api/bugs");
     this.router
-      .use(auth0provider.getAuthorizedUserInfo)
       .get("", this.getAll)
       .get("/:id", this.getById)
       .get("/:id/notes", this.getNotesByBugId)
+      .use(auth0provider.getAuthorizedUserInfo)
       .post("", this.create)
       .put("/:id", this.edit);
     // NOTE No deletes, only closes!
@@ -20,7 +20,7 @@ export class BugsController extends BaseController {
   async getAll(req, res, next) {
     try {
       // only gets bugs by user who is logged in
-      let data = await bugsService.getAll(req.userInfo.email);
+      let data = await bugsService.getAll();
       return res.send(data);
     } catch (err) {
       next(err);
@@ -28,7 +28,7 @@ export class BugsController extends BaseController {
   }
   async getById(req, res, next) {
     try {
-      let data = await bugsService.getById(req.params.id, req.userInfo.email);
+      let data = await bugsService.getById(req.params.id);
       return res.send(data);
     } catch (error) {
       next(error);
