@@ -40,7 +40,11 @@
         </form>
       </div>
       <div class="col-md-6 p-3">
-        <form @submit.prevent="createNote" class="see-through p-2 rounded">
+        <form
+          @submit.prevent="createNote"
+          class="see-through p-2 rounded"
+          v-if="!activeBug.closed"
+        >
           <div class="form-group">
             <label for="noteContent">Content</label>
             <textarea
@@ -56,7 +60,7 @@
     </div>
     <div class="row  p-2">
       <div class="col-md-6">
-        <div class="card see-through rounded">
+        <div class="card see-through rounded shadow">
           <div class="card-header see-through-white">
             <h2 class="card-title">{{ activeBug.title }}</h2>
           </div>
@@ -105,6 +109,15 @@
               :key="iNote.id"
               :noteProp="iNote"
             />
+            <tr v-if="!notes[0]">
+              <td>
+                No notes created
+              </td>
+              <td></td>
+              <td class="text-center"></td>
+
+              <td class="text-center"></td>
+            </tr>
           </tbody>
         </table>
         <table v-if="activeNote.id" class="table">
