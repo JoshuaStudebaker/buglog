@@ -1,8 +1,9 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <router-link class="navbar-brand" :to="{ name: 'Home' }"
-      >Bah HumBugs</router-link
-    >
+    <router-link class="navbar-brand" :to="{ name: 'Home' }">
+      Merry Scroogemas
+      <i class="fas fa-gifts"></i>:
+    </router-link>
     <button
       class="navbar-toggler"
       type="button"

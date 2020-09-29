@@ -1,10 +1,12 @@
 <template>
   <router-link
-    class="col-md-4"
+    class="col-md-4 p-3"
     :to="{ name: 'Bug', params: { bugId: bugProp.id } }"
   >
-    <div class="card ">
-      <div class="card-header">{{ bugProp.title }}</div>
+    <div class="card see-through rounded">
+      <div class="card-header see-through-white">
+        Humbug: {{ bugProp.title }}
+      </div>
       <div class="card-body">
         <p class="card-text">{{ bugProp.description }}</p>
         <p class="card-text">
@@ -15,11 +17,9 @@
         <p>{{ bugProp.creatorEmail }}</p>
       </div>
 
-      <div class="card-footer green-font" v-if="!bugProp.closed">
-        <p>Status: Open</p>
-      </div>
-      <div class="card-footer red-font" v-if="bugProp.closed">
-        <p>Status: Closed</p>
+      <div class="card-footer see-through-white">
+        <p v-if="bugProp.closed" class="text-danger">Status: Closed</p>
+        <p v-if="!bugProp.closed" class="text-success">Status: Open</p>
       </div>
     </div>
   </router-link>
@@ -56,5 +56,13 @@ export default {
 
 .green-font {
   color: green;
+}
+
+.see-through {
+  background-color: hsla(218, 19%, 89%, 0.8);
+}
+
+.see-through-white {
+  background-color: hsla(218, 19%, 98%, 0.8);
 }
 </style>
