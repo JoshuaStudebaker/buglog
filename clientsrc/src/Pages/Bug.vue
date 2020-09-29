@@ -1,126 +1,144 @@
 <template>
-  <div class="row scrooge-background">
-    <div class="card col-6">
-      <div class="card-header">{{ activeBug.title }}</div>
-      <div class="card-body">
-        <p>{{ activeBug.description }}</p>
-        <p v-if="activeBug.closed">Closed</p>
-        <p v-if="!activeBug.closed">Open</p>
-      </div>
+  <div class="container-fluid scrooge-background">
+    <div class="row p-3">
       <div
-        class="card-footer"
+        class="col-md-6"
         v-if="
           !activeBug.closed &&
             activeBug.creatorEmail == $auth.userInfo.email.toLowerCase()
         "
       >
         <form @submit.prevent="editActiveBug">
-          <div class="form-check">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              id="exampleCheck1"
-              v-model="editedBug.closed"
-            />
-            <label class="form-check-label" for="exampleCheck1"
-              >Close Bug (this can't be undone!)</label
-            >
+          <input
+            type="text"
+            class="form-control mx-3"
+            placeholder="New Bug Name..."
+            v-model="editedBug.title"
+          />
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Edit Description"
+            aria-describedby="helpId"
+            v-model="editedBug.description"
+          />
+          <button type="submit" class="btn btn-primary">Edit Bug</button>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <form @submit.prevent="createNote">
+          <div class="form-group">
+            <label for="noteContent">Content</label>
+            <textarea
+              v-model="newNote.content"
+              class="form-control"
+              id="exampleFormControlTextarea1"
+              rows="3"
+            ></textarea>
           </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary">Create Note</button>
         </form>
       </div>
     </div>
-    <div class="col-6">
-      <form @submit.prevent="createNote">
-        <div class="form-group">
-          <label for="noteContent">Content</label>
-          <textarea
-            v-model="newNote.content"
-            class="form-control"
-            id="exampleFormControlTextarea1"
-            rows="3"
-          ></textarea>
+    <div class="row  p-3">
+      <div class="col-md-6">
+        <div class="card see-through rounded">
+          <div class="card-header see-through-white">
+            <h2 class="card-title">{{ activeBug.title }}</h2>
+          </div>
+          <div class="card-body">
+            <p>{{ activeBug.description }}</p>
+            <p v-if="activeBug.closed">Closed</p>
+            <p v-if="!activeBug.closed">Open</p>
+          </div>
+          <div
+            class="card-footer"
+            v-if="
+              !activeBug.closed &&
+                activeBug.creatorEmail == $auth.userInfo.email.toLowerCase()
+            "
+          >
+            <form @submit.prevent="editActiveBug">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="exampleCheck1"
+                  v-model="editedBug.closed"
+                />
+                <label class="form-check-label" for="exampleCheck1"
+                  >Close Bug (this can't be undone!)</label
+                >
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
         </div>
-        <button type="submit" class="btn btn-primary">Create Note</button>
-      </form>
-      <table v-if="!activeNote.id" class="table">
-        <thead>
-          <tr>
-            <th scope="col">Note</th>
-            <th scope="col">Creator</th>
-            <th scope="col">Status</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          <notes-component
-            v-for="iNote in notes"
-            :key="iNote.id"
-            :noteProp="iNote"
-          />
-        </tbody>
-      </table>
-      <table v-if="activeNote.id" class="table">
-        <thead>
-          <tr>
-            <th scope="col">Note</th>
+      </div>
+      <div class="col-6">
+        <table v-if="!activeNote.id" class="table">
+          <thead>
+            <tr>
+              <th scope="col">Note</th>
+              <th scope="col">Creator</th>
+              <th scope="col">Status</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <notes-component
+              v-for="iNote in notes"
+              :key="iNote.id"
+              :noteProp="iNote"
+            />
+          </tbody>
+        </table>
+        <table v-if="activeNote.id" class="table">
+          <thead>
+            <tr>
+              <th scope="col">Note</th>
 
-            <th scope="col">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <td>{{ this.activeNote.content }}</td>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <td>{{ this.activeNote.content }}</td>
 
-          <td>
-            {{ this.activeNote.flagged }}
-          </td>
-        </tbody>
-      </table>
-      <form v-if="activeNote.id" @submit.prevent="editNote" class="form-inline">
-        <div class="form-group">
-          <label for="noteContent">Content</label>
-          <textarea
-            v-model="editedNote.content"
-            class="form-control"
-            id="exampleFormControlTextarea1"
-            rows="3"
-          ></textarea>
-        </div>
-        <div class="form-group">
-          <label for="status">Example multiple select</label>
-          <select class="form-control" id="status" v-model="editedNote.flagged">
-            <option value="pending">pending</option>
-            <option value="completed">completed</option>
-            <option value="rejected">rejected</option>
-          </select>
-        </div>
-        <button type="submit" class="btn btn-success">Edit Note</button>
-      </form>
-    </div>
-    <div
-      class="col-6"
-      v-if="
-        !activeBug.closed &&
-          activeBug.creatorEmail == $auth.userInfo.email.toLowerCase()
-      "
-    >
-      <form @submit.prevent="editActiveBug">
-        <input
-          type="text"
-          class="form-control mx-3"
-          placeholder="New Bug Name..."
-          v-model="editedBug.title"
-        />
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Edit Description"
-          aria-describedby="helpId"
-          v-model="editedBug.description"
-        />
-        <button type="submit" class="btn btn-warning">Edit Bug</button>
-      </form>
+            <td>
+              {{ this.activeNote.flagged }}
+            </td>
+          </tbody>
+        </table>
+        <form
+          v-if="activeNote.id"
+          @submit.prevent="editNote"
+          class="form-inline"
+        >
+          <div class="form-group">
+            <label for="noteContent">Content</label>
+            <textarea
+              v-model="editedNote.content"
+              class="form-control"
+              id="exampleFormControlTextarea1"
+              rows="3"
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label for="status">Example multiple select</label>
+            <select
+              class="form-control"
+              id="status"
+              v-model="editedNote.flagged"
+            >
+              <option value="pending">pending</option>
+              <option value="completed">completed</option>
+              <option value="rejected">rejected</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-success">Edit Note</button>
+        </form>
+      </div>
     </div>
   </div>
 </template>

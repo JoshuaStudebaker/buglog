@@ -5,7 +5,7 @@
   >
     <div class="card see-through rounded">
       <div class="card-header see-through-white">
-        <h5 class="card-title">Humbug: {{ bugProp.title }}</h5>
+        <h5 class="card-title">{{ bugProp.title }}</h5>
         <h6 class="card-subtitle text-muted">By: {{ bugProp.creatorEmail }}</h6>
       </div>
       <div class="card-body">
