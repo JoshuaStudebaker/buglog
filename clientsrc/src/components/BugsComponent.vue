@@ -5,21 +5,23 @@
   >
     <div class="card see-through rounded">
       <div class="card-header see-through-white">
-        Humbug: {{ bugProp.title }}
+        <h5 class="card-title">Humbug: {{ bugProp.title }}</h5>
+        <h6 class="card-subtitle text-muted">By: {{ bugProp.creatorEmail }}</h6>
       </div>
       <div class="card-body">
         <p class="card-text">{{ bugProp.description }}</p>
-        <p class="card-text">
-          <span v-if="bugProp.closed">Closed on:</span
-          ><span v-if="!bugProp.closed">Last Edited on:</span>
-          {{ new Date(bugProp.updatedAt).toUTCString() }}
-        </p>
-        <p>{{ bugProp.creatorEmail }}</p>
       </div>
 
-      <div class="card-footer see-through-white">
-        <p v-if="bugProp.closed" class="text-danger">Status: Closed</p>
-        <p v-if="!bugProp.closed" class="text-success">Status: Open</p>
+      <div class="card-footer see-through-white py-1">
+        <p v-if="bugProp.closed" class="text-danger mb-0">Status: Closed</p>
+        <p v-if="!bugProp.closed" class="mb-0">Status: Open</p>
+        <p class="mb-0">
+          <span v-if="bugProp.closed" class="text-danger"
+            >Closed on: {{ new Date(bugProp.updatedAt).toUTCString() }}</span
+          ><span v-if="!bugProp.closed"
+            >Last Updated: {{ new Date(bugProp.updatedAt).toUTCString() }}</span
+          >
+        </p>
       </div>
     </div>
   </router-link>

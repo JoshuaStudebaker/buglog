@@ -1,6 +1,9 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <router-link class="navbar-brand" :to="{ name: 'Home' }">
+  <nav class="navbar navbar-expand-lg navbar-light bg-danger">
+    <router-link
+      class="navbar-brand text-light stave-shadow-big"
+      :to="{ name: 'Home' }"
+    >
       Merry Scroogemas
       <i class="fas fa-gifts"></i>:
     </router-link>
@@ -18,7 +21,7 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item" :class="{ active: $route.name == 'Home' }">
-          <router-link :to="{ name: 'Home' }" class="nav-link"
+          <router-link :to="{ name: 'Home' }" class="nav-link text-light"
             >Home</router-link
           >
         </li>
@@ -27,20 +30,20 @@
           v-if="$auth.isAuthenticated"
           :class="{ active: $route.name == 'Profile' }"
         >
-          <router-link class="nav-link" :to="{ name: 'Profile' }"
+          <router-link class="nav-link text-light" :to="{ name: 'Profile' }"
             >Profile</router-link
           >
         </li>
       </ul>
       <span class="navbar-text">
         <button
-          class="btn btn-success"
+          class="btn btn-primary"
           @click="login"
           v-if="!$auth.isAuthenticated"
         >
           Login
         </button>
-        <button class="btn btn-danger" @click="logout" v-else>logout</button>
+        <button class="btn btn-success" @click="logout" v-else>logout</button>
       </span>
     </div>
   </nav>
@@ -67,4 +70,18 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.scrooge-background {
+  background-image: url("../assets/Scrooge-home.jpg");
+  background-size: cover;
+  background-position: bottom;
+}
+
+.see-through {
+  background-color: hsla(218, 19%, 89%, 0.8);
+}
+
+.stave-shadow-black {
+  text-shadow: 0.5px 0.5px 0px black;
+}
+</style>

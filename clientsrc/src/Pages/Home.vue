@@ -1,7 +1,7 @@
 <template>
   <div class="home scrooge-background container-fluid d-flex flex-column">
     <div class="row text-light my-3 pr-3">
-      <div class="col-6 d-flex align-items-center">
+      <div class="col-6 d-flex align-items-center stave-shadow-black">
         <h1>Track your Humbugs!</h1>
       </div>
       <div class="col-6 see-through shadow py-3 rounded">
