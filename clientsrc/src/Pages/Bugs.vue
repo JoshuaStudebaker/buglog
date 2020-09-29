@@ -1,8 +1,10 @@
 <template>
   <div class="bugs container-fluid d-flex flex-column scrooge-background">
-    <div class="row my-2">
-      <div class="col-6">
-        <label for="toggleView">Filter</label>
+    <div class="row my-3 p-3">
+      <div class="col-6 see-through shadow py-3 rounded">
+        <label for="toggleView" class="text-light stave-shadow-black"
+          ><h5>Filter by Status:</h5></label
+        >
         <select class="form-control" id="toggleView" v-model="toggleView">
           <option value="1">All</option>
           <option value="2">Open</option>
