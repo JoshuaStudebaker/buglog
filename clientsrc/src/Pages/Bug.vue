@@ -80,7 +80,6 @@
           <thead class="see-through-white">
             <tr>
               <th scope="col">Note</th>
-              <th scope="col">Creator</th>
               <th scope="col">Status</th>
               <th scope="col">Edit</th>
               <th scope="col">Delete</th>

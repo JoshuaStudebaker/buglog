@@ -1,8 +1,11 @@
 <template>
   <tr>
-    <td>{{ noteProp.content }}</td>
-    <td>{{ noteProp.creatorEmail }}</td>
-    <td class="text-center">
+    <td>
+      {{ noteProp.content }}<br /><span class="text-muted"
+        >By: {{ noteProp.creatorEmail }}</span
+      >
+    </td>
+    <td>
       {{ noteProp.flagged }}
     </td>
     <td class="text-center">
