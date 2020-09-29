@@ -1,5 +1,5 @@
 <template>
-  <div class="bugs container-fluid d-flex flex-column">
+  <div class="bugs container-fluid d-flex flex-column scrooge-background">
     <div class="row my-2">
       <div class="col-6">
         <label for="toggleView">Filter</label>
@@ -116,4 +116,19 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.scrooge-background {
+  background-image: url("../assets/Scrooge-home.jpg");
+  background-size: cover;
+  background-position: top;
+  min-height: 100vh;
+}
+
+.see-through {
+  background-color: hsla(218, 19%, 89%, 0.8);
+}
+
+.stave-shadow-black {
+  text-shadow: 0.5px 0.5px 0px black;
+}
+</style>

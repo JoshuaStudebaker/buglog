@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="row scrooge-background">
     <div class="card col-6">
       <div class="card-header">{{ activeBug.title }}</div>
       <div class="card-body">
@@ -188,5 +188,20 @@ export default {
 
 .green-font {
   color: green;
+}
+
+.scrooge-background {
+  background-image: url("../assets/Scrooge-home.jpg");
+  background-size: cover;
+  background-position: top;
+  min-height: 100vh;
+}
+
+.see-through {
+  background-color: hsla(218, 19%, 89%, 0.8);
+}
+
+.stave-shadow-black {
+  text-shadow: 0.5px 0.5px 0px black;
 }
 </style>
