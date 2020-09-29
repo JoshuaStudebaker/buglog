@@ -1,32 +1,46 @@
 <template>
   <div class="container-fluid scrooge-background">
-    <div class="row p-3">
-      <div
-        class="col-md-6"
-        v-if="
-          !activeBug.closed &&
-            activeBug.creatorEmail == $auth.userInfo.email.toLowerCase()
-        "
-      >
-        <form @submit.prevent="editActiveBug">
-          <input
-            type="text"
-            class="form-control mx-3"
-            placeholder="New Bug Name..."
-            v-model="editedBug.title"
-          />
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Edit Description"
-            aria-describedby="helpId"
-            v-model="editedBug.description"
-          />
+    <div class="row p-2">
+      <div class="col-md-6 p-3">
+        <div
+          class="text-light"
+          v-if="
+            activeBug.closed ||
+              activeBug.creatorEmail != $auth.userInfo.email.toLowerCase()
+          "
+        >
+          <h2>Bah Humbug!</h2>
+        </div>
+        <form
+          @submit.prevent="editActiveBug"
+          class="see-through p-2 rounded"
+          v-if="
+            !activeBug.closed &&
+              activeBug.creatorEmail == $auth.userInfo.email.toLowerCase()
+          "
+        >
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="New Bug Name..."
+              v-model="editedBug.title"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Edit Description"
+              aria-describedby="helpId"
+              v-model="editedBug.description"
+            />
+          </div>
           <button type="submit" class="btn btn-primary">Edit Bug</button>
         </form>
       </div>
-      <div class="col-md-6">
-        <form @submit.prevent="createNote">
+      <div class="col-md-6 p-3">
+        <form @submit.prevent="createNote" class="see-through p-2 rounded">
           <div class="form-group">
             <label for="noteContent">Content</label>
             <textarea
@@ -40,7 +54,7 @@
         </form>
       </div>
     </div>
-    <div class="row  p-3">
+    <div class="row  p-2">
       <div class="col-md-6">
         <div class="card see-through rounded">
           <div class="card-header see-through-white">
@@ -52,7 +66,7 @@
             <p v-if="!activeBug.closed">Open</p>
           </div>
           <div
-            class="card-footer"
+            class="card-footer see-through-white"
             v-if="
               !activeBug.closed &&
                 activeBug.creatorEmail == $auth.userInfo.email.toLowerCase()
