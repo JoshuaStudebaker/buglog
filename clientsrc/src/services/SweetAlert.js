@@ -2,17 +2,19 @@ import Swal from "sweetalert2";
 
 export default class SweetAlert {
   static async sweetDelete(
-    text = "You will no longer be able to edit this or any of its contents!"
+    title = "Are you sure you want to close this Humbug!?",
+    text = "You will no longer be able to edit this or any of its contents!",
+    confirm = "Yes, close it down!"
   ) {
     try {
       let res = await Swal.fire({
-        title: "Are you sure you want to close this HumBug!?",
+        title: title,
         text: text,
         icon: "error",
         showCancelButton: true,
         confirmButtonColor: "#DC3545",
         cancelButtonColor: "#28A745",
-        confirmButtonText: "Yes, delete it!",
+        confirmButtonText: confirm,
       });
       if (res.value) {
         return true;

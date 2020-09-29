@@ -30,6 +30,10 @@ export default new Vuex.Store({
     setNotes(state, notes) {
       state.notes = notes;
     },
+
+    deleteNote(state, id) {
+      state.notes = state.notes.filter((c) => c.id != id);
+    },
   },
   actions: {
     setBearer({}, bearer) {
@@ -139,6 +143,19 @@ export default new Vuex.Store({
         commit("setActiveNote", {});
       } catch (error) {
         console.error(error);
+      }
+    },
+
+    async deleteNote({ commit }, id) {
+      if (
+        await SweetAlert.sweetDelete(
+          "Are you sure you want to delete this note?",
+          "It will be gone for good!",
+          "Yes, delete please!"
+        )
+      ) {
+        await api.delete("notes/" + id);
+        commit("deleteNote", id);
       }
     },
   },
