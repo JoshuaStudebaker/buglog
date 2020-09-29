@@ -23,6 +23,7 @@
               id="bugTitle"
               v-model="newBug.title"
               placeholder="Enter Bug Name..."
+              required
             />
           </div>
           <div class="form-group">
@@ -32,6 +33,7 @@
               id="bugDescription"
               v-model="newBug.description"
               placeholder="Enter Description..."
+              required
             ></textarea>
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>

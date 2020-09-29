@@ -52,6 +52,7 @@
               class="form-control"
               id="exampleFormControlTextarea1"
               rows="3"
+              required
             ></textarea>
           </div>
           <button type="submit" class="btn btn-primary">Create Note</button>
@@ -63,33 +64,51 @@
         <div class="card see-through rounded shadow">
           <div class="card-header see-through-white">
             <h2 class="card-title">{{ activeBug.title }}</h2>
+            <h6 class="card-subtitle text-muted">
+              By: {{ activeBug.creatorEmail }}
+            </h6>
           </div>
           <div class="card-body">
-            <p>{{ activeBug.description }}</p>
-            <p v-if="activeBug.closed">Closed</p>
-            <p v-if="!activeBug.closed">Open</p>
+            <p class="card-text">{{ activeBug.description }}</p>
           </div>
-          <div
-            class="card-footer see-through-white"
-            v-if="
-              !activeBug.closed &&
-                activeBug.creatorEmail == $auth.userInfo.email.toLowerCase()
-            "
-          >
-            <form @submit.prevent="editActiveBug">
-              <div class="form-check">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  id="exampleCheck1"
-                  v-model="editedBug.closed"
-                />
-                <label class="form-check-label" for="exampleCheck1"
-                  >Close Bug (this can't be undone!)</label
-                >
+          <div class="card-footer see-through-white py-1 px-3">
+            <div v-if="!activeBug.closed">
+              <form
+                @submit.prevent="editActiveBug"
+                v-if="
+                  activeBug.creatorEmail == $auth.userInfo.email.toLowerCase()
+                "
+                class="mb-2"
+              >
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="exampleCheck1"
+                    v-model="editedBug.closed"
+                  />
+                  <label class="form-check-label mb-1" for="exampleCheck1"
+                    >Close Bug (this can't be undone!)</label
+                  >
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm">
+                  Submit
+                </button>
+              </form>
+              <div v-else>
+                <p class="mb-1">Status: Open</p>
               </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+            </div>
+            <p class="mb-0">
+              <span v-if="!activeBug.closed"
+                >Last Updated:
+                {{ new Date(activeBug.updatedAt).toUTCString() }}</span
+              >
+              <span v-else class="text-danger"
+                >Closed on:
+                {{ new Date(activeBug.updatedAt).toUTCString() }}</span
+              >
+            </p>
           </div>
         </div>
       </div>
@@ -120,8 +139,8 @@
             </tr>
           </tbody>
         </table>
-        <table v-if="activeNote.id" class="table">
-          <thead>
+        <table v-if="activeNote.id" class="table see-through">
+          <thead class="see-through-white">
             <tr>
               <th scope="col">Note</th>
 
@@ -139,7 +158,7 @@
         <form
           v-if="activeNote.id"
           @submit.prevent="editNote"
-          class="form-inline"
+          class="see-through p-2"
         >
           <div class="form-group">
             <label for="noteContent">Content</label>
@@ -151,7 +170,7 @@
             ></textarea>
           </div>
           <div class="form-group">
-            <label for="status">Example multiple select</label>
+            <label for="status">Choose Status:</label>
             <select
               class="form-control"
               id="status"
@@ -162,7 +181,9 @@
               <option value="rejected">rejected</option>
             </select>
           </div>
-          <button type="submit" class="btn btn-success">Edit Note</button>
+          <button type="submit" class="btn btn-success">
+            Edit Note (or Cancel)
+          </button>
         </form>
       </div>
     </div>
