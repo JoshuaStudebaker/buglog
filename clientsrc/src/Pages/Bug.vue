@@ -75,9 +75,9 @@
           </div>
         </div>
       </div>
-      <div class="col-6">
-        <table v-if="!activeNote.id" class="table">
-          <thead>
+      <div class="col-md-6 scroll-x ">
+        <table v-if="!activeNote.id" class="table see-through table-sm ">
+          <thead class="see-through-white">
             <tr>
               <th scope="col">Note</th>
               <th scope="col">Creator</th>
@@ -221,5 +221,9 @@ export default {
 
 .stave-shadow-black {
   text-shadow: 0.5px 0.5px 0px black;
+}
+
+.scroll-x {
+  overflow-x: auto;
 }
 </style>

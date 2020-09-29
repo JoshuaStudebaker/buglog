@@ -8,7 +8,7 @@
       <i class="fas fa-gifts"></i>:
     </router-link>
     <button
-      class="navbar-toggler"
+      class="navbar-toggler bg-light"
       type="button"
       data-toggle="collapse"
       data-target="#navbarText"
